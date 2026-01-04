@@ -11,6 +11,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  adair_flutter_lib:
+    # ignore: invalid_dependency
+    path: ../adair-flutter-lib
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
