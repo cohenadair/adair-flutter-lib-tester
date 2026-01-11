@@ -1,65 +1,63 @@
+import 'package:adair_flutter_lib/app_config.dart';
+import 'package:adair_flutter_lib/pages/scroll_page.dart';
+import 'package:adair_flutter_lib/widgets/adair_flutter_lib_app.dart';
+import 'package:adair_flutter_lib/widgets/button.dart';
+import 'package:adair_flutter_lib/wrappers/firebase_auth_wrapper.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const AdairFlutterLibTester());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AdairFlutterLibTester extends StatefulWidget {
+  const AdairFlutterLibTester({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+  State<AdairFlutterLibTester> createState() => _AdairFlutterLibTesterState();
+}
+
+class _AdairFlutterLibTesterState extends State<AdairFlutterLibTester> {
+  @override
+  void initState() {
+    super.initState();
+
+    AppConfig.get.init(
+      appName: () => "Adair Flutter Lib Tester",
+      colorAppTheme: Colors.teal,
+      themeMode: () => ThemeMode.dark,
     );
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    return AdairFlutterLibApp(
+      managers: [],
+      requiresAuth: true,
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppConfig.get.colorAppTheme,
+          brightness: Brightness.dark,
+        ),
+        textTheme: ThemeData.dark().textTheme.copyWith(
+          bodySmall: const TextStyle(fontSize: 14),
+          bodyMedium: const TextStyle(fontSize: 16),
+          bodyLarge: const TextStyle(fontSize: 18),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      themeMode: ThemeMode.dark,
+      homeBuilder: (_) => ScrollPage(
+        appBar: AppBar(title: Text(AppConfig.get.appName())),
+        children: [
+          Button(
+            text: "Sign Out",
+            onPressed: () => FirebaseAuthWrapper.get.signOut(),
+          ),
+        ],
       ),
     );
   }
