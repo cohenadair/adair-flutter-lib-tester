@@ -14,6 +14,7 @@ dependencies:
   adair_flutter_lib:
     # ignore: invalid_dependency
     path: ../adair-flutter-lib
+
   firebase_auth: ^6.1.3
   firebase_core: ^4.3.0
 
