@@ -43,11 +43,6 @@ class _AdairFlutterLibTesterState extends State<AdairFlutterLibTester> {
           seedColor: AppConfig.get.colorAppTheme,
           brightness: Brightness.dark,
         ),
-        textTheme: ThemeData.dark().textTheme.copyWith(
-          bodySmall: const TextStyle(fontSize: 14),
-          bodyMedium: const TextStyle(fontSize: 16),
-          bodyLarge: const TextStyle(fontSize: 18),
-        ),
       ),
       themeMode: ThemeMode.dark,
       homeBuilder: (_) => ScrollPage(
