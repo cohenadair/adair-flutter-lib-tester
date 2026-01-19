@@ -1,5 +1,6 @@
 import 'package:adair_flutter_lib/app_config.dart';
 import 'package:adair_flutter_lib/pages/scroll_page.dart';
+import 'package:adair_flutter_lib/res/theme.dart';
 import 'package:adair_flutter_lib/widgets/adair_flutter_lib_app.dart';
 import 'package:adair_flutter_lib/widgets/button.dart';
 import 'package:adair_flutter_lib/wrappers/firebase_auth_wrapper.dart';
@@ -22,13 +23,14 @@ class AdairFlutterLibTester extends StatefulWidget {
 }
 
 class _AdairFlutterLibTesterState extends State<AdairFlutterLibTester> {
+  static const _themeExt = AdairFlutterLibThemeExtension(app: Colors.teal);
+
   @override
   void initState() {
     super.initState();
 
     AppConfig.get.init(
       appName: () => "Adair Flutter Lib Tester",
-      colorAppTheme: Colors.teal,
       themeMode: () => ThemeMode.dark,
     );
   }
@@ -40,9 +42,10 @@ class _AdairFlutterLibTesterState extends State<AdairFlutterLibTester> {
       requiresAuth: true,
       darkTheme: ThemeData.dark().copyWith(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: AppConfig.get.colorAppTheme,
+          seedColor: _themeExt.app!,
           brightness: Brightness.dark,
         ),
+        extensions: [_themeExt],
       ),
       themeMode: ThemeMode.dark,
       homeBuilder: (_) => ScrollPage(
