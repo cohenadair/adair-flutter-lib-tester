@@ -31,6 +31,7 @@ class _AdairFlutterLibTesterState extends State<AdairFlutterLibTester> {
 
     AppConfig.get.init(
       appName: () => "Adair Flutter Lib Tester",
+      appIcon: Icons.onetwothree,
       themeMode: () => ThemeMode.dark,
     );
   }
@@ -39,7 +40,7 @@ class _AdairFlutterLibTesterState extends State<AdairFlutterLibTester> {
   Widget build(BuildContext context) {
     return AdairFlutterLibApp(
       managers: [],
-      requiresAuth: true,
+      authInfo: AdairFlutterLibAppAuthInfo(),
       darkTheme: ThemeData.dark().copyWith(
         colorScheme: ColorScheme.fromSeed(
           seedColor: _themeExt.app!,
