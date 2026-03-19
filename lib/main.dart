@@ -1,5 +1,6 @@
 import 'package:adair_flutter_lib/app_config.dart';
 import 'package:adair_flutter_lib/pages/scroll_page.dart';
+import 'package:adair_flutter_lib/pages/sign_in_page.dart';
 import 'package:adair_flutter_lib/res/theme.dart';
 import 'package:adair_flutter_lib/widgets/adair_flutter_lib_app.dart';
 import 'package:adair_flutter_lib/widgets/button.dart';
@@ -40,7 +41,7 @@ class _AdairFlutterLibTesterState extends State<AdairFlutterLibTester> {
   Widget build(BuildContext context) {
     return AdairFlutterLibApp(
       managers: [],
-      authInfo: AdairFlutterLibAppAuthInfo(),
+      signInPageInfo: SignInPageInfo(),
       darkTheme: ThemeData.dark().copyWith(
         colorScheme: ColorScheme.fromSeed(
           seedColor: _themeExt.app!,
